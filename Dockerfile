@@ -26,12 +26,12 @@ ARG HF_TOKEN
 ENV HF_TOKEN=${HF_TOKEN}
 
 # This command logs in and pre-downloads the model so the Pod starts instantly
-RUN RUN python3 -c "import os; \
-    from huggingface_hub import login, snapshot_download; \
-    from chatterbox.tts_turbo import ChatterboxTurboTTS; \
-    login(token=os.getenv('HF_TOKEN')); \
-    snapshot_download(repo_id='ResembleAI/chatterbox-turbo'); \
-    ChatterboxTurboTTS.from_pretrained(device='cpu')"
+RUN python3 -c "import os; \
+from huggingface_hub import login, snapshot_download; \
+from chatterbox.mtl_tts import ChatterboxMultilingualTTS; \
+login(token=os.getenv('HF_TOKEN')); \
+snapshot_download(repo_id='ResembleAI/chatterbox'); \
+ChatterboxMultilingualTTS.from_pretrained(device='cpu')"
 
 # Set the entrypoint to your handler
 CMD ["python", "-u", "src/handler.py"]
