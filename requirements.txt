@@ -1,0 +1,7 @@
+chatterbox-tts
+runpod==1.7.6
+torch>=2.2.1
+torchaudio
+soundfile
+numpy
+huggingface_hub
