@@ -27,7 +27,7 @@ ENV HF_TOKEN=${HF_TOKEN}
 
 # This command logs in and pre-downloads the model so the Pod starts instantly
 RUN python3 -c "from huggingface_hub import login; login(token='${HF_TOKEN}')" && \
-    python3 -m huggingface_hub.commands.download ResembleAI/chatterbox --resume-download && \
+    python3 -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='ResembleAI/chatterbox-turbo')" && \
     python3 -c "from chatterbox.tts_turbo import ChatterboxTurboTTS; ChatterboxTurboTTS.from_pretrained(device='cpu')"
 
 # Set the entrypoint to your handler
