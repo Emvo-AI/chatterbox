@@ -9,6 +9,7 @@ import tempfile
 import soundfile as sf
 from chatterbox.mtl_tts import ChatterboxMultilingualTTS
 
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s"
