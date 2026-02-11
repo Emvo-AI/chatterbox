@@ -25,7 +25,11 @@ if not torch.cuda.is_available():
         return orig_load(*args, **kwargs)
     torch.load = mocked_load
 
-mtl_tts_model = ChatterboxMultilingualTTS.from_pretrained(device=device)
+# mtl_tts_model = ChatterboxMultilingualTTS.from_pretrained(device=device)
+# In handler.py
+mtl_tts_model = ChatterboxMultilingualTTS.from_pretrained(
+    device='cuda'
+)
 
 def handler(event):
     input_data = event.get("input", {})
@@ -90,5 +94,6 @@ def handler(event):
                 logger.warning(f"Temp file cleanup failed: {cleanup_error}")
 
 # Start the Serverless function when the script is run
-if __name__ == '__main__':
-    runpod.serverless.start({'handler': handler })
+
+
+runpod.serverless.start({'handler': handler })
